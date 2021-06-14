@@ -3,6 +3,7 @@ import { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 
 import DialogActions from "@material-ui/core/DialogActions";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import EditPost from "./EditPost";
 
@@ -107,6 +108,21 @@ const PostListItem = (props) => {
     setIsSnackBarOpen(true);
   }
 
+  async function deletePost() {
+    const { id: uid } = post;
+    try {
+      const docRef = firestore.collection("posts").doc(uid);
+      await docRef.delete();
+      setSnackBarSeverity("success");
+      setSnackBarMessage("POST DELETED SUCCESSFULLY");
+      setTimeout(() => window.location.reload(), 100);
+    } catch (error) {
+      setSnackBarSeverity("error");
+      setSnackBarMessage("NOT ABLE TO DELETE POST");
+    }
+    setIsSnackBarOpen(true);
+  }
+
   function closeSnackBar() {
     setIsSnackBarOpen(false);
   }
@@ -154,6 +170,15 @@ const PostListItem = (props) => {
               onClick={archivePost}
             >
               {curArchivedStatus ? <Unarchive /> : <Archive />}
+            </IconButton>
+          </LightTooltip>
+          <LightTooltip title={"DELETE POST"} placement="top">
+            <IconButton
+              aria-label="delete"
+              color="primary"
+              onClick={deletePost}
+            >
+              <DeleteIcon />
             </IconButton>
           </LightTooltip>
         </div>
