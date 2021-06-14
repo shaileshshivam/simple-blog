@@ -24,7 +24,9 @@ const Home = (props) => {
           </div>
           <div className="card-container">
             {posts.length > 1 &&
-              posts.slice(1).map((post) => <PostThumbnail post={post} />)}
+              posts
+                .slice(1)
+                .map((post) => <PostThumbnail key={post.id} post={post} />)}
           </div>
           <Footer />
         </div>

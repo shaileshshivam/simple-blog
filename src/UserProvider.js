@@ -19,7 +19,6 @@ const UserProvider = (props) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user, "from user provider ");
         setUser({
           user: user,
           pending: false,

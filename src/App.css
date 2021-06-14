@@ -577,6 +577,7 @@ input::placeholder {
 .navbar-avatar {
   background-color: #5740a0 !important;
   color: white;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 1256px) and (max-width: 1600px) {

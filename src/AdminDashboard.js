@@ -1,34 +1,16 @@
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { CircularProgress } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Switch, withStyles, Tooltip } from "@material-ui/core";
-import {
-  AccountCircle,
-  Fullscreen,
-  PostAdd,
-  PostAddRounded,
-} from "@material-ui/icons";
-import React, { useState } from "react";
+import { withStyles, Tooltip } from "@material-ui/core";
+import { AccountCircle, Home, PostAddRounded } from "@material-ui/icons";
+import React from "react";
 import { useContext } from "react";
 import { UserContext } from "./UserProvider";
 import Avatar from "@material-ui/core/Avatar";
 
-import { auth, signIn } from "./firebase";
-import ErrorMessage from "./ErrorMessage";
+import { auth } from "./firebase";
 
-import Dialog from "@material-ui/core/Dialog";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-
-import CloseIcon from "@material-ui/icons/Close";
-import Slide from "@material-ui/core/Slide";
 import { useHistory } from "react-router-dom";
 
 import PostList from "./PostList";
@@ -79,11 +61,14 @@ const AdminDashboard = (props) => {
     history.push("/");
   }
 
+  function goToHome() {
+    history.push("/");
+  }
+
   function addBio() {
     history.push("admin/bio", user.uid);
   }
 
-  console.log(user, "from admin");
   return (
     <div>
       {user && (
@@ -101,6 +86,11 @@ const AdminDashboard = (props) => {
       {user && (
         <div className="admin-dashboard-container">
           <div className="admin-dashboard-sidebar">
+            <LightTooltip placement="bottom" title="HOME">
+              <IconButton size="large" style={style.addPost} onClick={goToHome}>
+                <Home style={{ fontSize: "3.5rem" }} />
+              </IconButton>
+            </LightTooltip>
             <LightTooltip placement="bottom" title="ADD POST">
               <IconButton
                 size="large"

@@ -5,7 +5,7 @@ import PostListItem from "./PostListItem";
 
 const PostList = (props) => {
   const [posts, setPosts] = useState([]);
-  console.log("posts => ", posts);
+
   useEffect(() => {
     async function getAllPosts() {
       const snapshot = await firestore.collection("posts").get();

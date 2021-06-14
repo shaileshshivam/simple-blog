@@ -11,14 +11,13 @@ const collectDocAndIds = (doc) => {
 };
 
 const PostProvider = (props) => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
 
   const { children } = props;
 
   useEffect(() => {
     async function getPosts() {
       const snapshot = await firestore.collection("posts").get();
-      console.log({ docs: snapshot.docs });
       setPosts(snapshot.docs.map((doc) => collectDocAndIds(doc)));
     }
     getPosts();

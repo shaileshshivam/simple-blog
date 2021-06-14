@@ -43,7 +43,9 @@ const About = (props) => {
             />
 
             <h2 className="about-name">{user.name}</h2>
-            <p className="about-bio">{user.bio.substring(0, 400)}</p>
+            <p style={{ backgroundColor: "#c7c7c7" }} className="about-bio">
+              {user.bio.substring(0, 400)}
+            </p>
             <footer className="about-social">
               <a
                 href={

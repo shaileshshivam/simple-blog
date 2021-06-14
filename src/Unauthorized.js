@@ -1,13 +1,5 @@
-import {
-  IconButton,
-  Typography,
-  Card,
-  CardContent,
-  Divider,
-  CircularProgress,
-} from "@material-ui/core";
+import { IconButton, Typography, CircularProgress } from "@material-ui/core";
 
-import LockSharpIcon from "@material-ui/icons/LockSharp";
 import { useState } from "react";
 import { AccountCircleRounded } from "@material-ui/icons";
 
@@ -92,7 +84,6 @@ const Unauthorized = (props) => {
     } catch (error) {
       setInProgress(false);
       setError(error);
-      console.log("error", error);
     }
   }
 

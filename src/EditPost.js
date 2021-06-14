@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import CancelIcon from "@material-ui/icons/Cancel";
 
-import ErrorBoundary from "./ErrrorBoundary";
-import { auth, storage, firestore } from "./firebase";
-import axios from "axios";
+import { storage, firestore } from "./firebase";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import "../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import TextField from "@material-ui/core/TextField";
 
-import FormData from "form-data";
 import { Button, Grid, IconButton, Typography } from "@material-ui/core";
 import Preview from "./Preview";
 
-import PostAddIcon from "@material-ui/icons/PostAdd";
-import { UserContext } from "./UserProvider";
-import Icon from "@material-ui/core/Icon";
 import { nanoid } from "nanoid";
-import ImageIcon from "./image.svg";
 import "./App.css";
 
 import TextInput from "./TextInput";
 import { Cancel, SaveSharp } from "@material-ui/icons";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -87,10 +79,6 @@ const EditPost = (props) => {
 
   let [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   let [isPostValid, setIsPostValid] = useState(false);
-
-  function goBack() {
-    history.push("/admin");
-  }
 
   function handleSnackBarClose(event, reason) {
     if (reason === "clickaway") {

@@ -22,13 +22,13 @@ function renderTags(rawTags) {
     .split(",")
     .map((tag) => tag.trim())
     .filter((tag) => tag.length > 0);
-  console.log(tags);
+
   return tags.map((tag) => <Chip label={tag} style={TagStyles}></Chip>);
 }
 
 const Preview = (props) => {
   const { title, editorState, tags, author, coverImage } = props;
-  console.log(editorState);
+
   const markup = draftToHtml(editorState);
 
   return (

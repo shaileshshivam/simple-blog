@@ -9,10 +9,9 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { firestore, storage } from "./firebase";
 
 import { UserContext } from "./UserProvider";
-import { useLocation } from "react-router-dom";
-import { functionsIn } from "lodash";
 
 import Unauthorized from "./Unauthorized";
+import { useHistory } from "react-router-dom";
 
 const style = {
   input: {
@@ -49,6 +48,8 @@ const BioEditor = (props) => {
   const [snackBarMessage, setSnackBarMessage] = useState();
   const [snackBarSeverity, setSnackBarSeverity] = useState();
 
+  let history = useHistory();
+
   let { user, pending, isLoggedIn } = useContext(UserContext);
 
   async function updateProfileInformation() {
@@ -67,7 +68,7 @@ const BioEditor = (props) => {
       setIsSnackBarOpen(true);
     } else {
       try {
-        const docRef = firestore.collection("public-users").doc(user.uid);
+        const docRef = firestore.collection("users").doc(user.uid);
         await docRef.set(
           {
             name,
@@ -83,6 +84,7 @@ const BioEditor = (props) => {
         setSnackBarSeverity("success");
         setSnackBarMessage("DETAILS UPDATED");
         setIsSnackBarOpen(true);
+        setTimeout(() => history.push("/admin"), 1600);
       } catch (error) {
         setSnackBarSeverity("error");
         setSnackBarMessage("ERROR WHILE UPDATING");
