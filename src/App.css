@@ -600,6 +600,12 @@ input::placeholder {
     flex-wrap: wrap;
     justify-content: space-between;
   }
+
+  .no-post-icon {
+    width: 100%;
+    max-height: 20rem;
+    object-fit: scale-down;
+  }
 }
 
 @media screen and (min-width: 1019px) and (max-width: 1256px) {
@@ -626,6 +632,12 @@ input::placeholder {
 
   .post-footer {
     justify-content: center;
+  }
+
+  .no-post-icon {
+    width: 100%;
+    max-height: 20rem;
+    object-fit: scale-down;
   }
 }
 
@@ -784,5 +796,12 @@ input::placeholder {
 
   .footer {
     grid-column: 1 / -1;
+  }
+
+  .no-post-icon {
+    width: 100%;
+
+    max-height: 20rem;
+    object-fit: scale-down;
   }
 }

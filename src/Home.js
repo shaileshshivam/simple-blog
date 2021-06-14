@@ -9,6 +9,8 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Loading from "./Loading";
 
+import NoPostsPage from "./NoPostsPage";
+
 const Home = (props) => {
   const posts = useContext(PostContext);
 
@@ -28,6 +30,7 @@ const Home = (props) => {
         </div>
       )}
       {!posts && <Loading />}
+      {posts && posts.length === 0 && <NoPostsPage />}
     </>
   );
 };
