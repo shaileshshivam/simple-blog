@@ -1,11 +1,18 @@
 import { useState, useContext } from "react";
-import { Typography, Button, Snackbar } from "@material-ui/core";
+import {
+  Typography,
+  Button,
+  Snackbar,
+  CircularProgress,
+} from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
 import { firestore, storage } from "./firebase";
 
 import { UserContext } from "./UserProvider";
 import { useLocation } from "react-router-dom";
 import { functionsIn } from "lodash";
+
+import Unauthorized from "./Unauthorized";
 
 const style = {
   input: {
@@ -60,7 +67,6 @@ const BioEditor = (props) => {
       setIsSnackBarOpen(true);
     } else {
       try {
-        console.log("user => ", user);
         const docRef = firestore.collection("public-users").doc(user.uid);
         await docRef.set(
           {
@@ -81,13 +87,11 @@ const BioEditor = (props) => {
         setSnackBarSeverity("error");
         setSnackBarMessage("ERROR WHILE UPDATING");
         setIsSnackBarOpen(true);
-        console.log(error);
       }
     }
   }
 
   async function uploadImage(file, bucket) {
-    console.log(`uploading file.${file.type.substr(6)}`);
     try {
       const response = await storage
         .ref()
@@ -107,7 +111,6 @@ const BioEditor = (props) => {
         },
       };
     } catch (e) {
-      console.log(e.customData.serverResponse);
       setSnackBarSeverity("error");
       setSnackBarMessage("IMAGE UPLOAD FAILED");
       setIsSnackBarOpen(true);
@@ -128,8 +131,12 @@ const BioEditor = (props) => {
 
   return (
     <div>
-      {pending && "LOADING ..."}
-      {!pending && !isLoggedIn && "UNAUTHORISED"}
+      {pending && (
+        <div className="flex-container-centered">
+          <CircularProgress />
+        </div>
+      )}
+      {!pending && !isLoggedIn && <Unauthorized />}
       {!pending && isLoggedIn && (
         <div className="bio-editor-container">
           <Typography

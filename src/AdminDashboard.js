@@ -1,8 +1,10 @@
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import { CircularProgress } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Switch, withStyles, Tooltip } from "@material-ui/core";
 import {
@@ -30,6 +32,7 @@ import Slide from "@material-ui/core/Slide";
 import { useHistory } from "react-router-dom";
 
 import PostList from "./PostList";
+import Unauthorized from "./Unauthorized";
 
 const style = {
   navbar: {
@@ -71,6 +74,11 @@ const AdminDashboard = (props) => {
     history.push("admin/post/new");
   }
 
+  function signOut() {
+    auth.signOut();
+    history.push("/");
+  }
+
   function addBio() {
     history.push("admin/bio", user.uid);
   }
@@ -107,14 +115,28 @@ const AdminDashboard = (props) => {
                 <AccountCircle style={{ fontSize: "3.5rem" }} />
               </IconButton>
             </LightTooltip>
+
+            <LightTooltip placement="bottom" title="SIGN OUT">
+              <IconButton size="large" style={style.addPost} onClick={signOut}>
+                <ExitToAppIcon style={{ fontSize: "3.5rem" }} />
+              </IconButton>
+            </LightTooltip>
           </div>
           <PostList></PostList>
         </div>
       )}
-      {pending && <strong>LOADING ...</strong>}
 
-      {pending === false && !isLoggedIn && (
-        <ErrorMessage message={"YOU'RE NOT LOGGED IN, PLEASE LOG IN"} />
+      {pending === false && !isLoggedIn && <Unauthorized />}
+
+      {pending && (
+        <div
+          className="flex-container-centered"
+          style={{
+            background: "linear-gradient(to right, #ffe259, #ffa751)",
+          }}
+        >
+          <CircularProgress style={{ color: "#41295a" }} />
+        </div>
       )}
     </div>
   );

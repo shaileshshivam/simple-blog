@@ -18,7 +18,6 @@ million viewers each month.`;
 const About = (props) => {
   const [user, setUser] = useState(null);
 
-  console.log(user);
   useEffect(() => {
     async function getUserInfo() {
       const snapshot = await firestore.collection("users").get();

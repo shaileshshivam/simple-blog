@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+import Dialog from "@material-ui/core/Dialog";
+
+import DialogActions from "@material-ui/core/DialogActions";
+
+import EditPost from "./EditPost";
+
 import { Button, IconButton, withStyles, Snackbar } from "@material-ui/core";
 import {
   Publish,
@@ -40,11 +46,16 @@ const PostListItem = (props) => {
   const [curArchivedStatus, setCurArchivedStatus] = useState(isArchived);
   const [curPublishedStatus, setCurPublishedStatus] = useState(isPublished);
 
-  const history = useHistory();
+  const [open, setOpen] = useState(false);
 
-  function editPost() {
-    history.push("/admin/post/edit", post);
-  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const history = useHistory();
 
   async function publishPost() {
     try {
@@ -111,7 +122,11 @@ const PostListItem = (props) => {
 
         <div className="post-list-item-toolbar">
           <LightTooltip title="EDIT POST" placement="top">
-            <IconButton color="primary" aria-label="edit" onClick={editPost}>
+            <IconButton
+              color="primary"
+              aria-label="edit"
+              onClick={handleClickOpen}
+            >
               <Edit />
             </IconButton>
           </LightTooltip>
@@ -152,6 +167,19 @@ const PostListItem = (props) => {
             {snackBarMessage}
           </Alert>
         </Snackbar>
+
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+          fullScreen={true}
+          fullWidth={true}
+          style={{
+            boxSizing: "border-box",
+          }}
+        >
+          <EditPost post={post} closeDialouge={handleClose} />
+        </Dialog>
       </div>
     </div>
   );

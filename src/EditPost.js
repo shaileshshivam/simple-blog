@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import CancelIcon from "@material-ui/icons/Cancel";
+
+import ErrorBoundary from "./ErrrorBoundary";
 import { auth, storage, firestore } from "./firebase";
 import axios from "axios";
 import { Editor } from "react-draft-wysiwyg";
@@ -69,11 +72,13 @@ function isValidPost(post) {
 const EditPost = (props) => {
   let history = useHistory();
 
-  let { state: post } = useLocation();
+  let { post, closeDialouge } = props;
 
   let [editorState, setEditorState] = useState(
     EditorState.createWithContent(convertFromRaw(JSON.parse(post.content)))
   );
+
+  let [uid, setUid] = useState(post.id);
   let [title, setTitle] = useState(post.title);
   let [author, setAuthor] = useState(post.author);
   let [tags, setTags] = useState(post.tags);
@@ -96,7 +101,6 @@ const EditPost = (props) => {
 
   function onStateChange(newState) {
     setEditorState(newState);
-    console.log(convertToRaw(newState.getCurrentContent()));
   }
 
   async function addPost() {
@@ -112,20 +116,21 @@ const EditPost = (props) => {
       if (isValidPost(post)) {
         post["slug"] = slugify(post.title.toLowerCase());
         post["updatedAt"] = new Date().toLocaleDateString();
-        const docRef = await firestore.collection("posts").add(post);
+        const docRef = await firestore
+          .collection("posts")
+          .doc(uid)
+          .update(post);
 
         setIsPostValid(true);
         setIsSnackBarOpen(true);
-        setTimeout(() => history.push("/admin"), 1500);
+        setTimeout(closeDialouge, 1500);
       } else {
-        console.log("don't add shit content");
         setIsSnackBarOpen(true);
       }
-    } catch (e) {}
+    } catch (error) {}
   }
 
   async function uploadImage(file, bucket) {
-    console.log(`uploading file.${file.type.substr(6)}`);
     try {
       const response = await storage
         .ref()
@@ -143,7 +148,6 @@ const EditPost = (props) => {
         },
       };
     } catch (e) {
-      console.log(e.customData.serverResponse);
       return e;
     }
   }
@@ -156,7 +160,6 @@ const EditPost = (props) => {
       return;
     }
     setCoverImageURL(response.data.link);
-    console.log("coverImageURL", response.data.link);
   }
 
   async function handleContentImageUpload(file) {
@@ -165,9 +168,6 @@ const EditPost = (props) => {
     if (response instanceof Error) {
       return null;
     }
-
-    console.log(response);
-
     return response;
   }
 
@@ -175,7 +175,12 @@ const EditPost = (props) => {
     <Grid container spacing="2">
       <Grid item lg="6" sm="12" style={PostContainerStyles}>
         <h1>Edit Post</h1>
-
+        <IconButton
+          onClick={closeDialouge}
+          style={{ position: "absolute", right: "1rem", top: 0 }}
+        >
+          <CancelIcon style={{ fontSize: "2.75rem" }} />
+        </IconButton>
         <TextInput
           name="title"
           required={true}
@@ -248,7 +253,7 @@ const EditPost = (props) => {
           style={{
             marginTop: "1rem",
           }}
-          onClick={goBack}
+          onClick={closeDialouge}
         >
           CANCEL
         </Button>

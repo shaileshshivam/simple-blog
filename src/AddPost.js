@@ -86,7 +86,6 @@ const AddPost = (props) => {
 
   function onStateChange(newState) {
     setEditorState(newState);
-    console.log(convertToRaw(newState.getCurrentContent()));
   }
 
   async function addPost() {
@@ -109,14 +108,12 @@ const AddPost = (props) => {
         const docRef = await firestore.collection("posts").add(post);
         setTimeout(() => history.push("/admin"), 1500);
       } else {
-        console.log("don't add shit content");
         setIsSnackBarOpen(true);
       }
     } catch (e) {}
   }
 
   async function uploadImage(file, bucket) {
-    console.log(`uploading file.${file.type.substr(6)}`);
     try {
       const response = await storage
         .ref()
@@ -134,7 +131,6 @@ const AddPost = (props) => {
         },
       };
     } catch (e) {
-      console.log(e.customData.serverResponse);
       return e;
     }
   }
@@ -147,7 +143,6 @@ const AddPost = (props) => {
       return;
     }
     setCoverImageURL(response.data.link);
-    console.log("coverImageURL", response.data.link);
   }
 
   async function handleContentImageUpload(file) {
@@ -156,8 +151,6 @@ const AddPost = (props) => {
     if (response instanceof Error) {
       return null;
     }
-
-    console.log(response);
 
     return response;
   }

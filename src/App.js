@@ -46,9 +46,6 @@ function App() {
             <Route exact path="/admin/post/new">
               <AddPost />
             </Route>
-            <Route exact path="/admin/post/edit">
-              <EditPost />
-            </Route>
             <Route exact path="/admin/bio">
               <BioEditor />
             </Route>
