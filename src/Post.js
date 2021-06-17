@@ -38,7 +38,8 @@ const Post = (props) => {
 export default Post;
 
 function renderPost(post, slug) {
-  const { title, coverImage, content, author, tags, createdAt } = post;
+  const { title, coverImage, content, author, tags, createdAt, timeToRead } =
+    post;
 
   async function sharePost(event) {
     if (navigator.share) {
@@ -60,7 +61,7 @@ function renderPost(post, slug) {
       <h2 className="post-title">{title} </h2>
       <p className="post-author">
         {" "}
-        ✍️ {author} | {createdAt}
+        ✍️ {author} <br /> {createdAt} | {timeToRead}
       </p>
       <img src={coverImage} alt="" className="post-cover-image" />
       <div className="post-content">

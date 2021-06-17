@@ -24,6 +24,9 @@ import { useHistory } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import slugify from "slugify";
+
+import readingTime from "reading-time";
+
 const PostContainerStyles = {
   padding: "2rem",
 };
@@ -99,12 +102,14 @@ const AddPost = (props) => {
 
     try {
       if (isValidPost(post)) {
+        const string = editorState.getCurrentContent().getPlainText();
         setIsPostValid(true);
         setIsSnackBarOpen(true);
         post["isPublished"] = false;
         post["isArchived"] = false;
         post["slug"] = slugify(post.title.toLowerCase());
         post["createdAt"] = new Date().toLocaleDateString();
+        post["timeToRead"] = readingTime(string).text;
         const docRef = await firestore.collection("posts").add(post);
         setTimeout(() => history.push("/admin"), 1500);
       } else {

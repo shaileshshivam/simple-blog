@@ -21,6 +21,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import slugify from "slugify";
+import readingTime from "reading-time";
 
 const PostContainerStyles = {
   padding: "2rem",
@@ -102,8 +103,10 @@ const EditPost = (props) => {
 
     try {
       if (isValidPost(post)) {
+        const string = editorState.getCurrentContent().getPlainText();
         post["slug"] = slugify(post.title.toLowerCase());
         post["updatedAt"] = new Date().toLocaleDateString();
+        post["timeToRead"] = readingTime(string).text;
         const docRef = await firestore
           .collection("posts")
           .doc(uid)
