@@ -440,6 +440,12 @@ input::placeholder {
   font-size: 1.75rem;
 }
 
+.post-content > iframe {
+  display: flex;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .post-content > p > em {
   font-size: 1rem;
   text-align: center;
