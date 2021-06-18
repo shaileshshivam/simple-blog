@@ -737,7 +737,7 @@ input::placeholder {
     column-gap: 0;
   }
   .cover-page-container {
-    margin-top: 3.5rem;
+    margin-top: 4.5rem;
     grid-column: 2 / -2;
     gap: 0;
     row-gap: 2rem;
@@ -768,7 +768,7 @@ input::placeholder {
     grid-column: 2 / -2;
     font-size: 1.25rem;
     border-radius: 1rem;
-    margin-top: 4.5rem; /* sticky navbar margin*/
+    margin-top: 5rem; /* sticky navbar margin*/
     text-transform: uppercase;
     box-shadow: none;
     text-align: center;
@@ -874,8 +874,8 @@ input::placeholder {
   .navbar {
     width: 100%;
     grid-column: 1 / -1;
-    padding: 1rem 1rem;
-    height: 4rem;
+    padding: 1rem 0.85rem;
+    height: 5rem;
     left: 0;
     transform: none;
   }
@@ -898,7 +898,7 @@ input::placeholder {
   }
 
   .about-container {
-    margin-top: 5rem;
+    margin-top: 5.85rem;
     min-height: 100vh;
   }
 
