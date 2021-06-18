@@ -17,7 +17,10 @@ const PostProvider = (props) => {
 
   useEffect(() => {
     async function getPosts() {
-      const snapshot = await firestore.collection("posts").get();
+      const snapshot = await firestore
+        .collection("posts")
+        .where("isPublished", "==", true)
+        .get();
       setPosts(snapshot.docs.map((doc) => collectDocAndIds(doc)));
     }
     getPosts();

@@ -7,7 +7,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 import EditPost from "./EditPost";
 
-import { Button, IconButton, withStyles, Snackbar } from "@material-ui/core";
+import {
+  Button,
+  IconButton,
+  withStyles,
+  Snackbar,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogTitle,
+} from "@material-ui/core";
 import {
   Publish,
   Edit,
@@ -39,13 +48,15 @@ function Alert(props) {
 
 const PostListItem = (props) => {
   const { post } = props;
-  const { title, coverImage, isPublished, isArchived } = props.post;
+  const { title, coverImage, isPublished } = props.post;
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const [snackBarSeverity, setSnackBarSeverity] = useState("");
+  const [showDelete, setShowDelete] = useState(false);
 
-  const [curArchivedStatus, setCurArchivedStatus] = useState(isArchived);
   const [curPublishedStatus, setCurPublishedStatus] = useState(isPublished);
+
+  const [disableDelete, setDisableDelete] = useState(true);
 
   const [open, setOpen] = useState(false);
 
@@ -54,6 +65,13 @@ const PostListItem = (props) => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const confirmDelete = (event) => {
+    const { value } = event.target;
+    if (value === post.title.split(" ").slice(0, 5).join(" ")) {
+      setDisableDelete(false);
+    }
   };
 
   const history = useHistory();
@@ -76,30 +94,6 @@ const PostListItem = (props) => {
     } catch (error) {
       setSnackBarMessage(
         `ERROR ${curPublishedStatus ? "UNPUBLISHING" : "PUBLISHING"} POST`
-      );
-      setSnackBarSeverity("error");
-      console.error(error);
-    }
-
-    setIsSnackBarOpen(true);
-  }
-
-  async function archivePost() {
-    try {
-      await firestore.collection("posts").doc(post.id).set(
-        { isArchived: !curArchivedStatus },
-        {
-          merge: true,
-        }
-      );
-      setCurArchivedStatus(!curArchivedStatus);
-      setSnackBarMessage(
-        `POST ${curArchivedStatus ? "UNARCHIVED " : "ARCHIEVED"} SUCCESSFULLY`
-      );
-      setSnackBarSeverity("info");
-    } catch (error) {
-      setSnackBarMessage(
-        `ERROR ${curArchivedStatus ? "UNARCHIVING" : "ARCHIVING"} POST`
       );
       setSnackBarSeverity("error");
       console.error(error);
@@ -160,23 +154,11 @@ const PostListItem = (props) => {
             </IconButton>
           </LightTooltip>
 
-          <LightTooltip
-            title={` ${curArchivedStatus ? "UNARCHIVE" : "ARCHIVE"}  POST `}
-            placement="top"
-          >
-            <IconButton
-              color="primary"
-              aria-label="archive"
-              onClick={archivePost}
-            >
-              {curArchivedStatus ? <Unarchive /> : <Archive />}
-            </IconButton>
-          </LightTooltip>
           <LightTooltip title={"DELETE POST"} placement="top">
             <IconButton
               aria-label="delete"
               color="primary"
-              onClick={deletePost}
+              onClick={() => setShowDelete(true)}
             >
               <DeleteIcon />
             </IconButton>
@@ -204,6 +186,45 @@ const PostListItem = (props) => {
           }}
         >
           <EditPost post={post} closeDialouge={handleClose} />
+        </Dialog>
+
+        <Dialog
+          open={showDelete}
+          onClose={() => setShowDelete(false)}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">
+            <strong>Are you sure you want to delete this post ?</strong>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText style={{ color: "red" }}>
+              This is a permanent operation and cannot be reverted, please type
+              below given text to delete post <br /> <br />
+              <strong style={{ color: "green" }}>
+                {`${post.title.split(" ").slice(0, 5).join(" ")}`}
+              </strong>
+            </DialogContentText>
+            <TextField
+              autoFocus
+              id="deleteDialogue"
+              placeholder="Post Title"
+              type="text"
+              fullWidth
+              onChange={confirmDelete}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setShowDelete(false)} color="primary">
+              Cancel
+            </Button>
+            <Button
+              onClick={deletePost}
+              color="primary"
+              disabled={disableDelete}
+            >
+              Delete
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     </div>

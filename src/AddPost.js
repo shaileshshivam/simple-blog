@@ -106,7 +106,6 @@ const AddPost = (props) => {
         setIsPostValid(true);
         setIsSnackBarOpen(true);
         post["isPublished"] = false;
-        post["isArchived"] = false;
         post["slug"] = slugify(post.title.toLowerCase());
         post["createdAt"] = new Date().toLocaleDateString();
         post["timeToRead"] = readingTime(string).text;

@@ -39,7 +39,8 @@ const UnauthorizedCard = (props) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(to right, #ffe259, #ffa751)",
+        background:
+          "linear-gradient(to right, rgb(12 73 123 / 39%), rgb(132 82 143))",
       }}
     >
       {error && <ErrorCard error={error} />}
