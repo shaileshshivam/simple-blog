@@ -94,12 +94,14 @@ const About = (props) => {
             }}
           >
             <HomeIcon className="back-button-about" onClick={onRewind} />
-            <img
-              id="profilePic"
-              className="about-image"
-              alt="person"
-              src={user.profilePicURL}
-            />
+            {user.profilePicURL && (
+              <img
+                id="profilePic"
+                className="about-image"
+                alt="person"
+                src={user.profilePicURL}
+              />
+            )}
             <h2 className="about-name" style={{ color: background.color }}>
               {user.name}
             </h2>
