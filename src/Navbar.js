@@ -17,13 +17,9 @@ const Navbar = (props) => {
 
   return (
     <div className="navbar">
-      <Avatar className="navbar-avatar" onClick={sendToHome}>
-        <HomeIcon />
-      </Avatar>
+      <HomeIcon className="navbar-icon" onClick={sendToHome} />
 
-      <Avatar className="navbar-avatar" onClick={sendToAbout}>
-        <AccountCircleIcon />
-      </Avatar>
+      <AccountCircleIcon className="navbar-icon" onClick={sendToAbout} />
     </div>
   );
 };

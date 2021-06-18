@@ -19,7 +19,7 @@ const ErrorCard = ({ error }) => {
           "rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px",
       }}
     >
-      <ErrorOutlineSharpIcon style={{ color: "red", fontSize: "2.5rem" }} />
+      <ErrorOutlineSharpIcon style={{ color: "white", fontSize: "2.5rem" }} />
       <br></br>
       {error.message}
     </div>
@@ -32,7 +32,7 @@ const UnauthorizedCard = (props) => {
       style={{
         margin: 0,
         padding: "2rem",
-        color: "rgb(73 4 90 / 79%)",
+        color: "white",
         height: "100vh",
         width: "100vw",
         display: "flex",
@@ -94,10 +94,11 @@ const Unauthorized = (props) => {
         <div
           className="flex-container-centered"
           style={{
-            background: "linear-gradient(to right, #ffe259, #ffa751)",
+            background:
+              "linear-gradient(to right, rgb(12 73 123 / 39%), rgb(132 82 143))",
           }}
         >
-          <CircularProgress style={{ color: "#41295a" }} />
+          <CircularProgress style={{ color: "#222" }} />
         </div>
       )}
       {!inProgress && (

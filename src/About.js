@@ -29,7 +29,7 @@ function getRGB(colors) {
 
 const About = (props) => {
   const [user, setUser] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   let history = useHistory();
 
@@ -56,7 +56,11 @@ const About = (props) => {
   return (
     <>
       {user && (
-        <>
+        <div
+          className="container"
+          style={{ background, zIndex: "-10", minHeight: "100vh" }}
+        >
+          <Navbar />
           <section
             className="about-container"
             style={{
@@ -72,34 +76,26 @@ const About = (props) => {
             />
             <h2 className="about-name">{user.name}</h2>
             <Slider
+              className="about-slider"
               defaultValue={1.2}
-              min="0"
-              max="5"
+              min={0}
+              max={6}
               aria-labelledby="discrete-slider-custom"
               step={0.1}
-              style={{ width: "85%", margin: "0 auto", color: "white" }}
             />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-                width: "100%",
-                padding: "0 2rem",
-              }}
-            >
+            <div className="about-player">
               <FastRewindIcon
                 onClick={onRewind}
                 style={{ fontSize: "2.5rem", cursor: "pointer" }}
               />
               {isPlaying ? (
                 <PauseCircleOutlineIcon
-                  style={{ fontSize: "5rem", cursor: "pointer" }}
+                  style={{ fontSize: "4.5rem", cursor: "pointer" }}
                   onClick={() => setIsPlaying(!isPlaying)}
                 />
               ) : (
                 <PlayCircleOutlineIcon
-                  style={{ fontSize: "5rem" }}
+                  style={{ fontSize: "4.5rem" }}
                   onClick={() => setIsPlaying(!isPlaying)}
                 />
               )}
@@ -121,7 +117,9 @@ const About = (props) => {
               />
             </footer>
           </section>
-        </>
+
+          <Footer />
+        </div>
       )}
     </>
   );
