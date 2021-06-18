@@ -1,4 +1,5 @@
 import { Typography } from "@material-ui/core";
+import logo from "./bravos.svg";
 
 const Footer = (props) => {
   return (
@@ -6,7 +7,12 @@ const Footer = (props) => {
       className="footer"
       style={{ backgroundColor: "white", alignSelf: "flex-end" }}
     >
-      <Typography className="footer-text">Valar Morghulis</Typography>
+      <img
+        src={logo}
+        className="footer-logo"
+        alt="valar morghulis"
+        title="valar morghulis"
+      ></img>
     </footer>
   );
 };

@@ -535,7 +535,6 @@ input::placeholder {
 .about-slider {
   width: 40% !important;
   margin: 0 auto !important;
-  color: white !important;
 }
 .about-footer {
   margin-top: auto;
@@ -621,11 +620,10 @@ input::placeholder {
   border-radius: 3rem 3rem 0 0;
 }
 
-.footer-text {
-  font-weight: bold !important;
-  text-transform: uppercase;
-  word-spacing: 0.5rem;
-  letter-spacing: 2px;
+.footer-logo {
+  width: 100%;
+  height: 2rem;
+  font-weight: bolder;
 }
 
 .navbar-icon {
@@ -953,7 +951,6 @@ input::placeholder {
   .about-slider {
     width: 85% !important;
     margin: 0 auto !important;
-    color: white !important;
   }
 
   .about-player {

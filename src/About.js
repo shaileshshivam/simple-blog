@@ -16,15 +16,37 @@ import { useEffect, useState, useRef } from "react";
 import { firestore } from "./firebase";
 import { useHistory } from "react-router-dom";
 
-const bio = `Meet Katie: a girl who eats chocolate every day and sometimes even has
-cake for breakfast. After creating a small food blog just for fun, Katie
-watched the blog suddenly skyrocket in popularity, quickly becoming the
-#1 source for healthy desserts and comfort food recipes and ranked as
-one of the top 25 cooking websites on the internet – with up to 8
-million viewers each month.`;
+const backgrounds = [
+  {
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    color: "white",
+  },
+  {
+    background: "linear-gradient(to right, #434343 0%, black 100%)",
+    color: "white",
+  },
+  {
+    background: "linear-gradient(to right, #ff758c 0%, #ff7eb3 100%)",
+    color: "#222",
+  },
+  {
+    background: "linear-gradient(to top, #4481eb 0%, #04befe 100%)",
+    color: "#ffffff",
+  },
 
-function getRGB(colors) {
-  return `rgb( ${colors[0]}, ${colors[1]}, ${colors[2]})`;
+  {
+    background:
+      "linear-gradient(-225deg, #FF057C 0%, #8D0B93 50%, #321575 100%)",
+    color: "white",
+  },
+  {
+    background: "linear-gradient(to right, #9796f0, #fbc7d4)",
+    color: "#222",
+  },
+];
+
+function randomBackground() {
+  return backgrounds[Math.floor(Math.random() * backgrounds.length)];
 }
 
 const About = (props) => {
@@ -33,9 +55,7 @@ const About = (props) => {
 
   let history = useHistory();
 
-  const [background, setBackground] = useState(
-    "linear-gradient(to right, #948e99, #2e1437)"
-  );
+  const background = randomBackground();
 
   useEffect(() => {
     async function getUserInfo() {
@@ -52,19 +72,25 @@ const About = (props) => {
   function onRewind() {
     history.push("/");
   }
-
   return (
     <>
       {user && (
         <div
           className="container"
-          style={{ background, zIndex: "-10", minHeight: "100vh" }}
+          style={{
+            background: background.background,
+            color: background.color,
+            zIndex: "-10",
+            minHeight: "100vh",
+          }}
         >
           <Navbar />
           <section
             className="about-container"
             style={{
-              background: background ? background : "#fff",
+              background: background
+                ? backgrounds[Math.floor(Math.random() * backgrounds.length)]
+                : "#fff",
             }}
           >
             <HomeIcon className="back-button-about" onClick={onRewind} />
@@ -74,7 +100,9 @@ const About = (props) => {
               alt="person"
               src={user.profilePicURL}
             />
-            <h2 className="about-name">{user.name}</h2>
+            <h2 className="about-name" style={{ color: background.color }}>
+              {user.name}
+            </h2>
             <Slider
               className="about-slider"
               defaultValue={1.2}
@@ -82,38 +110,53 @@ const About = (props) => {
               max={6}
               aria-labelledby="discrete-slider-custom"
               step={0.1}
+              style={{ color: background.color }}
             />
             <div className="about-player">
               <FastRewindIcon
                 onClick={onRewind}
-                style={{ fontSize: "2.5rem", cursor: "pointer" }}
+                style={{
+                  fontSize: "2.5rem",
+                  cursor: "pointer",
+                  color: background.color,
+                }}
               />
               {isPlaying ? (
                 <PauseCircleOutlineIcon
-                  style={{ fontSize: "4.5rem", cursor: "pointer" }}
+                  style={{
+                    fontSize: "4.5rem",
+                    cursor: "pointer",
+                    color: background.color,
+                  }}
                   onClick={() => setIsPlaying(!isPlaying)}
                 />
               ) : (
                 <PlayCircleOutlineIcon
-                  style={{ fontSize: "4.5rem" }}
+                  style={{ fontSize: "4.5rem", color: background.color }}
                   onClick={() => setIsPlaying(!isPlaying)}
                 />
               )}
               <FastForwardIcon
-                style={{ fontSize: "2.5rem", cursor: "pointer" }}
+                style={{
+                  fontSize: "2.5rem",
+                  cursor: "pointer",
+                  color: background.color,
+                }}
               />
             </div>
             {isPlaying && (
-              <p className="about-bio">{user.bio.substring(0, 400)}</p>
+              <p className="about-bio" style={{ ...randomBackground() }}>
+                {user.bio.substring(0, 400)}
+              </p>
             )}
             <footer className="about-footer">
               <TwitterIcon
                 className="svg-icon"
-                style={{ marginRight: "0.5rem" }}
+                style={{ marginRight: "0.5rem", color: background.color }}
               />
               <InstagramIcon
                 className="svg-icon"
-                style={{ marginLeft: "0.5rem" }}
+                style={{ marginLeft: "0.5rem", color: background.color }}
               />
             </footer>
           </section>
