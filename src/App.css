@@ -163,6 +163,8 @@ input::placeholder {
 /* Home Contaier */
 
 .container {
+  width: 75.5%;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(24, 1fr);
 }
@@ -201,7 +203,7 @@ input::placeholder {
 /* incomplete changes here, width changed see the effects */
 
 .cover-container {
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   border-radius: 1rem;
 }
 
@@ -226,7 +228,7 @@ input::placeholder {
 
 .card-container {
   margin-top: 3rem;
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   display: grid;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -238,6 +240,7 @@ input::placeholder {
 /* incomplete changes here, width changed see the effects */
 
 .cover-page-container {
+  margin-top: 7.5rem;
   grid-column: 1 / -1;
   display: grid;
   padding-top: 2rem;
@@ -323,7 +326,7 @@ input::placeholder {
 }
 
 .post-title {
-  margin: 2rem 0 0 0;
+  margin: 9rem 0 0 0; /* sticky navbar margin*/
   grid-column: 4 / -4;
   padding: 2rem;
   font-size: 3rem;
@@ -480,6 +483,7 @@ input::placeholder {
   flex-direction: column;
   color: white;
   margin-top: 1rem;
+  margin-top: 8rem; /* sticky navbar margin*/
   min-height: 80vh;
 }
 
@@ -583,6 +587,11 @@ input::placeholder {
 /* Navbar */
 
 .navbar {
+  position: fixed;
+  z-index: 100;
+  width: calc(75.5% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
   grid-column: 4 / -4;
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
@@ -598,7 +607,7 @@ input::placeholder {
 }
 
 .footer {
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   margin-top: 2rem;
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
@@ -633,12 +642,24 @@ input::placeholder {
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-@media screen and (min-width: 1256px) and (max-width: 1600px) {
+@media screen and (min-width: 1601px) and (max-width: 1800px) {
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .post-thumbnail-container {
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 1485px) and (max-width: 1600px) {
   .navbar,
   .footer,
   .cover-page-container,
   .card-container {
-    grid-column: 2 / -2;
+    grid-column: 1 / -1;
   }
 
   .cover-container {
@@ -662,12 +683,12 @@ input::placeholder {
   }
 }
 
-@media screen and (min-width: 1019px) and (max-width: 1256px) {
+@media screen and (min-width: 1019px) and (max-width: 1484px) {
   .navbar,
   .footer,
   .cover-page-container,
   .card-container {
-    grid-column: 3 / -3;
+    grid-column: 1 / -1;
   }
 
   .cover-container {
@@ -716,6 +737,7 @@ input::placeholder {
     column-gap: 0;
   }
   .cover-page-container {
+    margin-top: 3.5rem;
     grid-column: 2 / -2;
     gap: 0;
     row-gap: 2rem;
@@ -746,6 +768,7 @@ input::placeholder {
     grid-column: 2 / -2;
     font-size: 1.25rem;
     border-radius: 1rem;
+    margin-top: 4.5rem; /* sticky navbar margin*/
     text-transform: uppercase;
     box-shadow: none;
     text-align: center;
@@ -844,10 +867,23 @@ input::placeholder {
     justify-content: center;
   }
 
+  .container {
+    width: 100%;
+  }
+
   .navbar {
+    width: 100%;
     grid-column: 1 / -1;
-    padding: 2rem 1rem;
-    height: 6rem;
+    padding: 1rem 1rem;
+    height: 4rem;
+    left: 0;
+    transform: none;
+  }
+
+  .navbar-icon {
+    font-size: 1.5rem !important;
+    height: 2.5rem !important;
+    width: 2.5rem !important;
   }
 
   .footer {
@@ -862,6 +898,7 @@ input::placeholder {
   }
 
   .about-container {
+    margin-top: 5rem;
     min-height: 100vh;
   }
 
