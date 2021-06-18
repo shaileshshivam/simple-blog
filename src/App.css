@@ -319,6 +319,7 @@ input::placeholder {
 /* Post Styles ( need to have one version for preview pane else clash)*/
 
 .post-container {
+  grid-column: 1 / -1;
   margin: 0;
   padding: 0;
   display: grid;
@@ -327,7 +328,7 @@ input::placeholder {
 
 .post-title {
   margin: 9rem 0 0 0; /* sticky navbar margin*/
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   padding: 2rem;
   font-size: 3rem;
   text-transform: uppercase;
@@ -339,7 +340,7 @@ input::placeholder {
 .post-cover-image {
   margin: 0;
   display: block;
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   width: 100%;
   max-height: 70vh;
   object-fit: cover;
@@ -354,7 +355,7 @@ input::placeholder {
   padding: 0.5rem;
   font-size: 1.35rem;
   text-align: center;
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 2px;
@@ -367,7 +368,7 @@ input::placeholder {
   margin-bottom: 2rem;
   padding: 2rem 2rem;
   border-radius: 0 0 5px 5px;
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
 
   background-color: rgb(251, 251, 251);
 }
@@ -376,7 +377,7 @@ input::placeholder {
   display: flex;
   justify-content: flex-start;
   padding: 2rem 1rem;
-  grid-column: 4 / -4;
+  grid-column: 1 / -1;
 }
 .post-content > p {
   padding: 0;
@@ -591,7 +592,7 @@ input::placeholder {
   width: calc(75.5% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  grid-column: 4 / -4;
+
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   padding: 2rem 2rem;
@@ -750,7 +751,7 @@ input::placeholder {
     grid-column: 1 / -1;
   }
   .cover-title {
-    font-size: 1rem;
+    font-size: 1.25rem;
 
     padding: 1rem 1rem 2rem 1rem;
   }

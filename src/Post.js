@@ -56,23 +56,26 @@ function renderPost(post, slug) {
   }
 
   return (
-    <article className="post-container">
+    <div className="container">
       <Navbar />
-      <h2 className="post-title">{title} </h2>
-      <p className="post-author">
-        {" "}
-        ✍️ {author} <br /> {createdAt} | {timeToRead}
-      </p>
-      <img src={coverImage} alt="" className="post-cover-image" />
-      <div className="post-content">
-        {parse(draftToHtml(JSON.parse(content)))}
-      </div>
-      <div className="post-footer">
-        <IconButton onClick={sharePost}>
-          <ShareIcon></ShareIcon>
-        </IconButton>
-      </div>
+      <article className="post-container">
+        <h2 className="post-title">{title} </h2>
+        <p className="post-author">
+          {" "}
+          ✍️ {author} <br /> {createdAt} | {timeToRead}
+        </p>
+        <img src={coverImage} alt="" className="post-cover-image" />
+        <div className="post-content">
+          {parse(draftToHtml(JSON.parse(content)))}
+        </div>
+        <div className="post-footer">
+          <IconButton onClick={sharePost}>
+            <ShareIcon></ShareIcon>
+          </IconButton>
+        </div>
+      </article>
+
       <Footer />
-    </article>
+    </div>
   );
 }

@@ -42,7 +42,6 @@ const BioEditor = (props) => {
   const [profilePicURL, setProfilePicURL] = useState("");
   const [twitterId, setTwitterId] = useState("");
   const [instaId, setInstaId] = useState("");
-  const [snapchatId, setSnapchatId] = useState("");
 
   const [isSnackBarOpen, setIsSnackBarOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState();
@@ -76,7 +75,6 @@ const BioEditor = (props) => {
             profilePicURL,
             twitterId,
             instaId,
-            snapchatId,
           },
           { merge: true }
         );
@@ -184,13 +182,6 @@ const BioEditor = (props) => {
             placeholder="Instagram ID"
             required
             onChange={(e) => setInstaId(e.target.value)}
-          />
-          <input
-            style={style.input}
-            type="text"
-            placeholder="Snapchat ID"
-            required
-            onChange={(e) => setSnapchatId(e.target.value)}
           />
           <label style={{ padding: "0.25rem 0.1rem" }}>
             Bio ( 400 chars max )
