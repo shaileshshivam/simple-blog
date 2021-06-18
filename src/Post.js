@@ -49,9 +49,7 @@ function renderPost(post, slug) {
           text: author,
           url: `https://blog-2d02f.web.app/posts/${slug}`,
         });
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     }
   }
 

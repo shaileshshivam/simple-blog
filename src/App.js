@@ -19,9 +19,6 @@ function App() {
       <UserProvider>
         <PostProvider>
           <Switch>
-            {/* <Route exact path="/admin">
-              <Admin />
-            </Route> */}
             <Route exact path="/">
               <Home></Home>
             </Route>

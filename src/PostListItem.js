@@ -17,14 +17,7 @@ import {
   TextField,
   DialogTitle,
 } from "@material-ui/core";
-import {
-  Publish,
-  Edit,
-  Archive,
-  Unarchive,
-  Visibility,
-  VisibilityOff,
-} from "@material-ui/icons";
+import { Edit, Visibility, VisibilityOff } from "@material-ui/icons";
 
 import Tooltip from "@material-ui/core/Tooltip";
 import { useHistory } from "react-router-dom";

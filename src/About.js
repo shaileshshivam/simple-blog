@@ -12,7 +12,7 @@ import FastRewindIcon from "@material-ui/icons/FastRewind";
 
 import HomeIcon from "@material-ui/icons/Home";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { firestore } from "./firebase";
 import { useHistory } from "react-router-dom";
 

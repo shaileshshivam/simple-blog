@@ -1,4 +1,3 @@
-import { Typography } from "@material-ui/core";
 import logo from "./bravos.svg";
 
 const Footer = (props) => {

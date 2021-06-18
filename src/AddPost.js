@@ -1,20 +1,16 @@
 import React, { useContext, useState } from "react";
-import { auth, storage, firestore } from "./firebase";
-import axios from "axios";
+import { storage, firestore } from "./firebase";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw } from "draft-js";
 import "../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import TextField from "@material-ui/core/TextField";
 
-import FormData from "form-data";
-import { Button, Grid, IconButton, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import Preview from "./Preview";
 
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import { UserContext } from "./UserProvider";
-import Icon from "@material-ui/core/Icon";
+
 import { nanoid } from "nanoid";
-import ImageIcon from "./image.svg";
 import "./App.css";
 
 import TextInput from "./TextInput";

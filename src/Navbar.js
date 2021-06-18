@@ -1,4 +1,3 @@
-import { Avatar } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HomeIcon from "@material-ui/icons/HomeRounded";
 
