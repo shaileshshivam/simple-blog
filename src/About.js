@@ -50,12 +50,16 @@ function randomBackground() {
 }
 
 const About = (props) => {
+  const { theme, changeTheme } = props;
   const [user, setUser] = useState(null);
   const [isPlaying, setIsPlaying] = useState(true);
 
   let history = useHistory();
 
-  const background = randomBackground();
+  function handlePlayPause() {
+    setIsPlaying(!isPlaying);
+    changeTheme(randomBackground());
+  }
 
   useEffect(() => {
     async function getUserInfo() {
@@ -78,20 +82,16 @@ const About = (props) => {
         <div
           className="container"
           style={{
-            background: background.background,
-            color: background.color,
-            zIndex: "-10",
+            background: "transparent",
+            color: "inherit",
+            zIndex: "1",
             minHeight: "100vh",
           }}
         >
           <Navbar />
           <section
             className="about-container"
-            style={{
-              background: background
-                ? backgrounds[Math.floor(Math.random() * backgrounds.length)]
-                : "#fff",
-            }}
+            style={{ background: "transparent" }}
           >
             <HomeIcon className="back-button-about" onClick={onRewind} />
             {user.profilePicURL && (
@@ -102,7 +102,7 @@ const About = (props) => {
                 src={user.profilePicURL}
               />
             )}
-            <h2 className="about-name" style={{ color: background.color }}>
+            <h2 className="about-name" style={{ color: theme.color }}>
               {user.name}
             </h2>
             <Slider
@@ -112,7 +112,7 @@ const About = (props) => {
               max={6}
               aria-labelledby="discrete-slider-custom"
               step={0.1}
-              style={{ color: background.color }}
+              style={{ color: theme.color }}
             />
             <div className="about-player">
               <FastRewindIcon
@@ -120,7 +120,7 @@ const About = (props) => {
                 style={{
                   fontSize: "2.5rem",
                   cursor: "pointer",
-                  color: background.color,
+                  color: theme.color,
                 }}
               />
               {isPlaying ? (
@@ -128,21 +128,21 @@ const About = (props) => {
                   style={{
                     fontSize: "4.5rem",
                     cursor: "pointer",
-                    color: background.color,
+                    color: theme.color,
                   }}
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  onClick={handlePlayPause}
                 />
               ) : (
                 <PlayCircleOutlineIcon
-                  style={{ fontSize: "4.5rem", color: background.color }}
-                  onClick={() => setIsPlaying(!isPlaying)}
+                  style={{ fontSize: "4.5rem", color: theme.color }}
+                  onClick={handlePlayPause}
                 />
               )}
               <FastForwardIcon
                 style={{
                   fontSize: "2.5rem",
                   cursor: "pointer",
-                  color: background.color,
+                  color: theme.color,
                 }}
               />
             </div>
@@ -159,7 +159,7 @@ const About = (props) => {
               >
                 <TwitterIcon
                   className="svg-icon"
-                  style={{ marginRight: "0.5rem", color: background.color }}
+                  style={{ marginRight: "0.5rem", color: theme.color }}
                 />
               </Link>
               <Link
@@ -169,7 +169,7 @@ const About = (props) => {
               >
                 <InstagramIcon
                   className="svg-icon"
-                  style={{ marginLeft: "0.5rem", color: background.color }}
+                  style={{ marginLeft: "0.5rem", color: theme.color }}
                 />
               </Link>
             </footer>
