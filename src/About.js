@@ -14,7 +14,7 @@ import HomeIcon from "@material-ui/icons/Home";
 
 import { useEffect, useState } from "react";
 import { firestore } from "./firebase";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const backgrounds = [
   {
@@ -152,14 +152,26 @@ const About = (props) => {
               </p>
             )}
             <footer className="about-footer">
-              <TwitterIcon
-                className="svg-icon"
-                style={{ marginRight: "0.5rem", color: background.color }}
-              />
-              <InstagramIcon
-                className="svg-icon"
-                style={{ marginLeft: "0.5rem", color: background.color }}
-              />
+              <Link
+                to={`https://www.twitter.com/${
+                  user.twitterId ? user.twitterId : "twitter"
+                }`}
+              >
+                <TwitterIcon
+                  className="svg-icon"
+                  style={{ marginRight: "0.5rem", color: background.color }}
+                />
+              </Link>
+              <Link
+                to={`https://www.instagram.com/${
+                  user.instaId ? user.instaId : "instagram"
+                }`}
+              >
+                <InstagramIcon
+                  className="svg-icon"
+                  style={{ marginLeft: "0.5rem", color: background.color }}
+                />
+              </Link>
             </footer>
           </section>
 
