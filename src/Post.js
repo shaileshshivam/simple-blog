@@ -62,7 +62,12 @@ function renderPost(post, slug) {
           {" "}
           ✍️ {author} <br /> {createdAt} | {timeToRead}
         </p>
-        <img src={coverImage} alt="" className="post-cover-image" />
+        <img
+          src={coverImage}
+          alt=""
+          className="post-cover-image"
+          loading="lazy"
+        />
         <div className="post-content">
           {parse(draftToHtml(JSON.parse(content)))}
         </div>

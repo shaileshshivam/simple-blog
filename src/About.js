@@ -100,6 +100,7 @@ const About = (props) => {
                 className="about-image"
                 alt="person"
                 src={user.profilePicURL}
+                loading="lazy"
               />
             )}
             <h2 className="about-name" style={{ color: theme.color }}>

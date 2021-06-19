@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import "./App.css";
 import Home from "./Home";
-import Post from "./Post";
-import AdminDashboard from "./AdminDashboard";
-
-import AddPost from "./AddPost";
 
 import { Route, Switch, useLocation } from "react-router-dom";
 
 import PostProvider from "./PostProvider";
 import UserProvider from "./UserProvider";
-import About from "./About";
-import BioEditor from "./EditBio";
+
+import { CircularProgress } from "@material-ui/core";
+
+const Post = React.lazy(() => import("./Post"));
+const About = React.lazy(() => import("./About"));
+const EditBio = React.lazy(() => import("./EditBio"));
+const AddPost = React.lazy(() => import("./AddPost"));
+const AdminDashboard = React.lazy(() => import("./AdminDashboard"));
 
 const backgrounds = [
   {
@@ -46,6 +48,14 @@ function randomBackground() {
   return backgrounds[Math.floor(Math.random() * backgrounds.length)];
 }
 
+const Loading = () => {
+  return (
+    <div className="flex-container-centered">
+      <CircularProgress />
+    </div>
+  );
+};
+
 function App() {
   const { pathname } = useLocation();
   let [theme, changeTheme] = useState(randomBackground());
@@ -61,26 +71,31 @@ function App() {
       <UserProvider>
         <PostProvider>
           <Switch>
-            <Route exact path="/">
-              <Home></Home>
-            </Route>
+            <Suspense fallback={<Loading />}>
+              <Route exact path="/">
+                <Home></Home>
+              </Route>
 
-            <Route exact path="/about">
-              <About changeTheme={changeTheme} theme={theme} />
-            </Route>
-            <Route exact path="/posts/:slug">
-              <Post />
-            </Route>
-            <Route exact path="/admin">
-              <AdminDashboard />
-            </Route>
+              <Route exact path="/about">
+                <About changeTheme={changeTheme} theme={theme} />
+              </Route>
 
-            <Route exact path="/admin/post/new">
-              <AddPost />
-            </Route>
-            <Route exact path="/admin/bio">
-              <BioEditor />
-            </Route>
+              <Route exact path="/posts/:slug">
+                <Post />
+              </Route>
+
+              <Route exact path="/admin">
+                <AdminDashboard />
+              </Route>
+
+              <Route exact path="/admin/post/new">
+                <AddPost />
+              </Route>
+
+              <Route exact path="/admin/bio">
+                <EditBio />
+              </Route>
+            </Suspense>
           </Switch>
         </PostProvider>
       </UserProvider>

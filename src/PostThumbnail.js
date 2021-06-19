@@ -65,7 +65,12 @@ const PostThumnail = (props) => {
         style={Object.assign({}, style, { cursor: "pointer" })}
         onClick={showPostDetails}
       >
-        <img className="post-thumbnail-img" src={coverImage} alt="cover"></img>
+        <img
+          className="post-thumbnail-img"
+          src={coverImage}
+          alt="cover"
+          loading="lazy"
+        ></img>
         <p style={style} className="post-thumbnail-title">
           {title.split(" ").slice(0, 15).join(" ")}
         </p>

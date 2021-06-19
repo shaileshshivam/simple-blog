@@ -63,7 +63,12 @@ const Cover = (props) => {
       style={Object.assign({}, style, { cursor: "pointer" })}
       onClick={showPostDetails}
     >
-      <img src={coverImage} alt="cover" className="cover-image"></img>
+      <img
+        src={coverImage}
+        alt="cover"
+        className="cover-image"
+        loading="lazy"
+      ></img>
 
       <p style={style} className="post-thumbnail-title cover-title">
         {title && title.split(" ").slice(0, 15).join(" ")}
